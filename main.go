@@ -4,11 +4,10 @@ import (
 	// "net/http"
 	// "strconv"
 
-	"log"
+	"os"
 	"proyek/configs"
 	"proyek/routes"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	// "gorm.io/driver/mysql"
 	// "gorm.io/gorm"
@@ -27,7 +26,16 @@ func main() {
 	// e.GET("/hello", HelloController) //endpoint
 	//route
 
-	e.Start(":8000")
+	// e.Start(":8000")
+	e.Start(":" + getPort())
+}
+
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
+	return port
 }
 
 // func loadEnv() {
